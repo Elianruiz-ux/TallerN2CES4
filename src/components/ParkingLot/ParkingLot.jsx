@@ -1,10 +1,17 @@
 import { useParking } from "../../context/ParkingContext/ParkingContext";
 
 function ParkingLot() {
-  const { getParkingSpaces, getOccupiedSpaces } = useParking();
+  const { getParkingSpaces, getVehicleAll, leaveParkingSpace } = useParking();
+
 
   const parkingSpaces = getParkingSpaces();
-  const occupiedSpaces = getOccupiedSpaces();
+  const vehicles = getVehicleAll();
+
+  const handleElimiarCelda = (e) => {
+    const space = e;
+    leaveParkingSpace(space);
+  };
+
 
   return (
     <div>
@@ -13,9 +20,9 @@ function ParkingLot() {
         <h3>Celdas Disponibles:</h3>
         <ul>
           {parkingSpaces.map(
-            (space) =>
+            (space, index) =>
               !space.occupied && (
-                <li key={space.number}>
+                <li key={index}>
                   {`${space.type === "car" ? "Carro" : "Moto"} - Celda ${
                     space.number
                   }`}
@@ -27,8 +34,17 @@ function ParkingLot() {
       <div>
         <h3>Celdas Ocupadas:</h3>
         <ul>
-          {occupiedSpaces.map((spaceNumber) => (
-            <li key={spaceNumber}>{`Celda ${spaceNumber} - Ocupada`}</li>
+          {vehicles.map((space, index) => (
+            <li key={index}>
+              {`Celda ${space.number} - Ocupada, vehiculo: ${
+                space.type === "car" ? "carro" : "moto"
+              }, placa: ${space.vehicle.licensePlate}, hora ingreso: ${
+                space.vehicle.entryTime
+              }`}
+              <button onClick={() => handleElimiarCelda(space.number)}>
+                Dar salida
+              </button>
+            </li>
           ))}
         </ul>
       </div>

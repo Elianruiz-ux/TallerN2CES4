@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { useVehicle } from "../../context/VehicleContext/VehicleContext";
+import { toast } from "react-toastify";
 
 function VehicleForm() {
   const { addVehicle } = useVehicle();
 
   const [vehicleType, setVehicleType] = useState("car");
   const [licensePlate, setLicensePlate] = useState("");
-  const [model, setModel] = useState("");
-  const [brand, setBrand] = useState("");
-  const [cylinder, setCylinder] = useState("");
+  const [model, setModel] = useState("2000");
+  const [brand, setBrand] = useState("honda");
+  const [cylinder, setCylinder] = useState("0-100");
   const [idDocument, setIdDocument] = useState("");
   const [name, setName] = useState("");
 
@@ -23,7 +24,10 @@ function VehicleForm() {
   };
 
   const handleLicensePlateChange = (event) => {
-    setLicensePlate(event.target.value);
+    const value = event.target.value;
+    setLicensePlate(value);
+
+    // Verificar el tipo de vehículo seleccionado
   };
 
   const handleModelChange = (event) => {
@@ -39,17 +43,31 @@ function VehicleForm() {
   };
 
   const handleAddVehicle = () => {
-    // Realiza las validaciones necesarias antes de agregar el vehículo
     if (
       !licensePlate ||
       !brand ||
       (!cylinder && vehicleType === "moto") ||
-      (!model && vehicleType === "car")
+      (!model && vehicleType === "car") ||
+      !idDocument ||
+      !name
     ) {
-      // Puedes manejar el error de validación aquí
-      return;
-    }
+      toast.warning("Rellena todos los campos");
+    } else if (vehicleType == "moto") {
+      // Para motos: 3 letras, 2 números y 1 letra
+      const motoPlateRegex = /^[A-Z]{3}\d{2}[A-Z]$/;
 
+      if (!motoPlateRegex.test(licensePlate.toUpperCase())) {
+        toast.error("Número de placa de moto inválido (AAA12A)");
+        return;
+      }
+    } else if (vehicleType == "car") {
+      // Para carros: 3 letras y 3 números
+      const carPlateRegex = /^[A-Z]{3}\d{3}$/;
+      if (!carPlateRegex.test(licensePlate.toUpperCase())) {
+        toast.error("Número de placa de carro inválido (AAA123)");
+        return;
+      }
+    }
     // Agregar el vehículo utilizando la función del contexto
     addVehicle({
       namePropetario: name,
@@ -60,13 +78,16 @@ function VehicleForm() {
       brand,
       cylinder: vehicleType === "moto" ? cylinder : undefined,
     });
+    toast.success("Vehiculo registrado");
 
     // Limpiar los campos después de agregar el vehículo
     setVehicleType("car");
     setLicensePlate("");
-    setModel("");
-    setBrand("");
-    setCylinder("");
+    setName("");
+    setIdDocument("");
+    setModel("2000");
+    setBrand("honda");
+    setCylinder("0-100");
   };
 
   return (
@@ -113,33 +134,60 @@ function VehicleForm() {
 
       <div>
         <label htmlFor="brand">Marca:</label>
-        <input
-          type="text"
-          id="brand"
-          value={brand}
-          onChange={handleBrandChange}
-        />
+        <select id="brand" value={brand} onChange={handleBrandChange}>
+          <option value="honda">Honda</option>
+          <option value="bmw">BMW</option>
+          <option value="suzuki">suzuki</option>
+          <option value="ktm">ktm</option>
+        </select>
       </div>
+
       {vehicleType === "moto" ? (
         <div>
           <label htmlFor="cylinder">Cilindraje:</label>
-          <input
-            type="text"
+          <select
             id="cylinder"
             value={cylinder}
             onChange={handleCylinderChange}
-          />
+          >
+            <option value="0-100">0-100</option>
+            <option value="101-200">101-200</option>
+            <option value="201-300">201-300</option>
+            <option value="301-400">301-400</option>
+            <option value="+401">+401</option>
+          </select>
         </div>
       ) : (
         <div>
           <label htmlFor="model">Modelo:</label>
-          <input
-            type="text"
-            id="model"
-            value={model}
-            onChange={handleModelChange}
-            disabled={vehicleType === "moto"}
-          />
+          <select id="model" value={model} onChange={handleModelChange}>
+            <option value="2000">2000</option>
+            <option value="2001">2002</option>
+            <option value="2002">2002</option>
+            <option value="2003">2003</option>
+            <option value="2004">2004</option>
+            <option value="2005">2005</option>
+            <option value="2006">2006</option>
+            <option value="2007">2007</option>
+            <option value="2008">2008</option>
+            <option value="2009">2009</option>
+            <option value="2010">2010</option>
+            <option value="2011">2011</option>
+            <option value="2012">2012</option>
+            <option value="2013">2013</option>
+            <option value="2014">2014</option>
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+            <option value="2024">2024</option>
+          </select>
         </div>
       )}
       <button onClick={handleAddVehicle}>Registrar Vehículo</button>

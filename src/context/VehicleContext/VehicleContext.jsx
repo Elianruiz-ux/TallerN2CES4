@@ -3,6 +3,7 @@
 /* eslint-disable react/prop-types */
 // VehicleContext.js
 import { createContext, useState, useContext } from "react";
+import { toast } from "react-toastify";
 
 const VehicleContext = createContext();
 
@@ -10,8 +11,21 @@ export const VehicleProvider = ({ children }) => {
   const [vehicles, setVehicles] = useState([]);
 
   const addVehicle = (vehicle) => {
-    console.log(vehicle);
-    setVehicles((prevVehicles) => [...prevVehicles, vehicle]);
+    // Verificar si la placa o el documento ya existen
+    const existingVehicle = vehicles.find(
+      (v) =>
+        v.licensePlate === vehicle.licensePlate ||
+        v.idDocument === vehicle.idDocument
+    );
+
+    if (existingVehicle) {
+      toast.error("Ya existe un vehículo con la misma placa o documento.");
+      return;
+    } else {
+      //   toast.success("Vehiculo registrado");
+
+      setVehicles((prevVehicles) => [...prevVehicles, vehicle]);
+    }
   };
 
   const getVehicles = () => {
