@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useUser } from "../../context/UserContext/UserContext";
+import { Button, Container, FormControl, TextField } from "@mui/material";
 
 function Login() {
   const { login } = useUser();
@@ -12,28 +13,32 @@ function Login() {
   };
 
   return (
-    <div>
+    <Container maxWidth="sm" >
       <h2>Login</h2>
-      <div>
-        <label htmlFor="username">Correo: </label>
-        <input
+      <FormControl fullWidth>
+        <TextField
+          variant="outlined"
+          label="Correo"
           type="email"
           id="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-      </div>
-      <div>
-        <label htmlFor="password">Contraseña:</label>
-        <input
+      </FormControl>
+      <FormControl fullWidth>
+        <TextField
+          variant="outlined"
+          label="Contraseña"
           type="password"
           id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-      </div>
-      <button onClick={handleLogin}>Iniciar Sesión</button>
-    </div>
+      </FormControl>
+      <Button variant="outlined" onClick={handleLogin}>
+        Iniciar Sesión
+      </Button>
+    </Container>
   );
 }
 

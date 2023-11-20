@@ -2,6 +2,15 @@ import { useState, useEffect } from "react";
 import { useParking } from "../../context/ParkingContext/ParkingContext";
 import { useVehicle } from "../../context/VehicleContext/VehicleContext";
 import { toast } from "react-toastify";
+import {
+  Button,
+  Container,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 
 function ParkingForm() {
   const {
@@ -99,66 +108,74 @@ function ParkingForm() {
   };
 
   return (
-    <div>
+    <Container maxWidth="sm">
       <h2>Registrar Ingreso al Parqueadero</h2>
-      <div>
-        <div>
-          <label htmlFor="Buscar">Buscar por placa o número de documento</label>
-          <input
-            id="Buscar"
-            type="text"
-            value={buscar}
-            onChange={handleBuscar}
-          />
-        </div>
-      </div>
-      <div>
-        <label htmlFor="vehicle">Selecciona un vehículo:</label>
-        <select
+      <FormControl fullWidth>
+        <TextField
+          variant="outlined"
+          label="Buscar por placa o número de documento"
+          id="Buscar"
+          type="text"
+          value={buscar}
+          onChange={handleBuscar}
+        />
+      </FormControl>
+      <FormControl fullWidth>
+        <InputLabel htmlFor="vehicle">Selecciona un vehículo</InputLabel>
+        <Select
+          labelId="vehicle"
           id="vehicle"
           value={selectedVehicle}
           onChange={handleVehicleChange}
+          label="Selecciona un vehículo"
         >
-          <option value="" disabled>
+          <MenuItem value="" disabled>
             Selecciona un vehículo
-          </option>
+          </MenuItem>
           {vehicleOptions.map((vehicle, index) => (
-            <option key={index} value={vehicle}>
+            <MenuItem key={index} value={vehicle}>
               {vehicle}
-            </option>
+            </MenuItem>
           ))}
-        </select>
-      </div>
-      <div>
-        <label htmlFor="space">Selecciona una celda:</label>
-
-        <select id="space" value={selectedSpace} onChange={handleSpaceChange}>
-          <option value="" disabled>
+        </Select>
+      </FormControl>
+      <FormControl fullWidth>
+        <InputLabel htmlFor="space">Selecciona una celda</InputLabel>
+        <Select
+          id="space"
+          labelId="space"
+          value={selectedSpace}
+          onChange={handleSpaceChange}
+          label="Selecciona una celda"
+        >
+          <MenuItem value="" disabled>
             Selecciona una celda
-          </option>
+          </MenuItem>
           {parkingSpaces.map((space, index) => {
             if (!space.occupied) {
               // Verificar el tipo de vehículo seleccionado
               if (typeSelected === "moto" && space.type === "moto") {
                 return (
-                  <option key={index} value={space.number}>
+                  <MenuItem key={index} value={space.number}>
                     {`Moto - Celda ${space.number}`}
-                  </option>
+                  </MenuItem>
                 );
               } else if (typeSelected === "car" && space.type === "car") {
                 return (
-                  <option key={index} value={space.number}>
+                  <MenuItem key={index} value={space.number}>
                     {`Carro - Celda ${space.number}`}
-                  </option>
+                  </MenuItem>
                 );
               }
             }
             return null; // No mostrar celdas ocupadas
           })}
-        </select>
-      </div>
-      <button onClick={handleParkVehicle}>Registrar Ingreso</button>
-    </div>
+        </Select>
+      </FormControl>
+      <Button variant="outlined" onClick={handleParkVehicle}>
+        Registrar Ingreso
+      </Button>
+    </Container>
   );
 }
 
