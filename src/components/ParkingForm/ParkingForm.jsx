@@ -121,8 +121,8 @@ function ParkingForm() {
             justifyContent: "center",
           }}
         >
-          <Typography variant="h4" textAlign="center" component="div">
-            Registrar ingreso al Parqueadero
+          <Typography variant="h5" textAlign="center" component="div">
+            Registrar ingreso al parqueadero
           </Typography>
 
           <FormControl fullWidth>

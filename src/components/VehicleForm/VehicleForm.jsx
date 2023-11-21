@@ -90,7 +90,6 @@ function VehicleForm() {
       brand,
       cylinder: vehicleType === "moto" ? cylinder : undefined,
     });
-    toast.success("Vehiculo registrado");
 
     // Limpiar los campos después de agregar el vehículo
     setVehicleType("car");
@@ -113,13 +112,13 @@ function VehicleForm() {
             justifyContent: "center",
           }}
         >
-          <Typography variant="h4" textAlign="center" component="div">
-            Registrar Vehículo
+          <Typography variant="h5" textAlign="center" component="div">
+            Registrar vehículo
           </Typography>
           <FormControl fullWidth>
-            <InputLabel htmlFor="vehicleType">Tipo de Vehículo</InputLabel>
+            <InputLabel htmlFor="vehicleType">Tipo de vehículo</InputLabel>
             <Select
-              label="Tipo de Vehículo"
+              label="Tipo de vehículo"
               labelId="vehicleType"
               id="vehicleType"
               value={vehicleType}
@@ -132,7 +131,7 @@ function VehicleForm() {
           <FormControl fullWidth>
             <TextField
               variant="outlined"
-              label="Número de Placa"
+              label="Número de placa"
               type="text"
               id="licensePlate"
               value={licensePlate}

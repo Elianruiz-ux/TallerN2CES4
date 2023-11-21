@@ -22,8 +22,7 @@ export const VehicleProvider = ({ children }) => {
       toast.error("Ya existe un vehículo con la misma placa o documento.");
       return;
     } else {
-      //   toast.success("Vehiculo registrado");
-
+        toast.success("Vehiculo registrado");
       setVehicles((prevVehicles) => [...prevVehicles, vehicle]);
     }
   };

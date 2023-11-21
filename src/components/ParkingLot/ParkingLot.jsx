@@ -33,7 +33,7 @@ function ParkingLot() {
     >
       <Grid item xs={12}>
         <Typography variant="h4" textAlign="center" component="div">
-          Estado del Parqueadero
+          Estado del parqueadero
         </Typography>
       </Grid>
 
@@ -43,7 +43,7 @@ function ParkingLot() {
             <TableHead>
               <TableRow>
                 <TableCell align="center" colSpan={2}>
-                  Celdas Disponibles
+                  Celdas disponibles
                 </TableCell>
               </TableRow>
               <TableRow>
@@ -75,7 +75,7 @@ function ParkingLot() {
             <TableHead>
               <TableRow>
                 <TableCell align="center" colSpan={5}>
-                  Celdas Ocupadas
+                  Celdas ocupadas
                 </TableCell>
               </TableRow>
               <TableRow>
@@ -89,10 +89,10 @@ function ParkingLot() {
             <TableBody>
               {vehicles.map((space, index) => (
                 <TableRow key={index}>
-                  <TableCell align="center">{`Celda ${space.number} - Ocupada`}</TableCell>
                   <TableCell align="center">
-                    {`${space.type === "car" ? "carro" : "moto"}`}
+                    {`${space.type === "car" ? "Carro" : "Moto"}`}
                   </TableCell>
+                  <TableCell align="center">{`Celda ${space.number} - Ocupada`}</TableCell>
                   <TableCell align="center">{`${space.vehicle.licensePlate}`}</TableCell>
                   <TableCell align="center">{`${space.vehicle.entryTime}`}</TableCell>
                   <TableCell align="center">

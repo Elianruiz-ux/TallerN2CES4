@@ -37,7 +37,7 @@ function Login() {
           }}
         >
           <Typography variant="h4" textAlign="center" component="div">
-            Login
+            Iniciar sesión
           </Typography>
           <FormControl fullWidth>
             <TextField

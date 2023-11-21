@@ -20,20 +20,20 @@ const darkTheme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={darkTheme}>
-    <CssBaseline />
-    <main>
-      <ToastContainer autoClose={2000} position="top-center" />
-      <UserProvider>
-        <VehicleProvider>
-          <ParkingProvider>
-            <Routes>
-              <Route path="/" element={<LoginPage />} />
-              <Route path="/dashboard" element={<DashboardPage />} />
-            </Routes>
-          </ParkingProvider>
-        </VehicleProvider>
-      </UserProvider>
-    </main>
+      <CssBaseline />
+      <main>
+        <ToastContainer autoClose={2000} position="top-center" />
+        <UserProvider>
+          <VehicleProvider>
+            <ParkingProvider>
+              <Routes>
+                <Route path="/" element={<LoginPage />} />
+                <Route path="/dashboard" element={<DashboardPage />} />
+              </Routes>
+            </ParkingProvider>
+          </VehicleProvider>
+        </UserProvider>
+      </main>
     </ThemeProvider>
   );
 }
