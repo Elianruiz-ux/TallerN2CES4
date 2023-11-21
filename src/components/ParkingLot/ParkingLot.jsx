@@ -1,6 +1,6 @@
 import {
   Button,
-  Container,
+  Grid,
   Paper,
   Table,
   TableBody,
@@ -8,6 +8,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from "@mui/material";
 import { useParking } from "../../context/ParkingContext/ParkingContext";
 
@@ -23,11 +24,22 @@ function ParkingLot() {
   };
 
   return (
-    <Container maxWidth="sm">
-      <h2>Estado del Parqueadero</h2>
-      <div>
+    <Grid
+      container
+      direction="row"
+      alignItems="flex-start"
+      spacing={2}
+      padding={2}
+    >
+      <Grid item xs={12}>
+        <Typography variant="h4" textAlign="center" component="div">
+          Estado del Parqueadero
+        </Typography>
+      </Grid>
+
+      <Grid item xs={4}>
         <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 700 }} aria-label="customized table">
+          <Table sx={{ minWidth: 350 }} aria-label="customized table">
             <TableHead>
               <TableRow>
                 <TableCell align="center" colSpan={2}>
@@ -56,10 +68,10 @@ function ParkingLot() {
             </TableBody>
           </Table>
         </TableContainer>
-      </div>
-      <div>
+      </Grid>
+      <Grid item xs={8}>
         <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 700 }} aria-label="customized table">
+          <Table sx={{ minWidth: 600 }} aria-label="customized table">
             <TableHead>
               <TableRow>
                 <TableCell align="center" colSpan={5}>
@@ -96,8 +108,8 @@ function ParkingLot() {
             </TableBody>
           </Table>
         </TableContainer>
-      </div>
-    </Container>
+      </Grid>
+    </Grid>
   );
 }
 

@@ -21,14 +21,15 @@ export const UserProvider = ({ children }) => {
   const login = (username, password) => {
     if (userQuemado == username && passwordQuemado == password) {
       window.location.href = "/#/dashboard";
-    }else{
-        toast.warning("Correo o contraseña incorrectas")
+      toast.success("Inicio de sesión exito!!");
+    } else {
+      toast.warning("Correo o contraseña incorrectas");
     }
   };
 
   const logout = () => {
-    // Lógica de cierre de sesión, si es necesario
-    // Puedes actualizar el estado del usuario aquí
+    window.location.href = "/#/";
+    toast.success("Se cerro correctamente la sesión");
   };
 
   return (

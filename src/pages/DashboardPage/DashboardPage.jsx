@@ -1,21 +1,49 @@
+import { Button, Grid, Typography } from "@mui/material";
 import ParkingForm from "../../components/ParkingForm/ParkingForm";
 import ParkingLot from "../../components/ParkingLot/ParkingLot";
 import VehicleForm from "../../components/VehicleForm/VehicleForm";
+import { useUser } from "../../context/UserContext/UserContext";
 
 function DashboardPage() {
+  const { logout } = useUser();
+
+  const handleCerrarSesion = () => {
+    logout();
+  };
   return (
-    <div>
-      <h1>Dashboard</h1>
+    <Grid container direction="row" padding={1} spacing={2}>
+      <Grid
+        item
+        xs={12}
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-between",
+          padding: 2,
+        }}
+      >
+        <Typography variant="h4" textAlign="center" component="div">
+          Dashboard
+        </Typography>
+        <Button variant="contained" onClick={handleCerrarSesion}>
+          Cerrar Sesión
+        </Button>
+      </Grid>
 
-      {/* Mostrar el formulario de registro de vehículos */}
-      <VehicleForm />
+      <Grid item container justifyContent="center" alignItems="center" xs={12}>
+        <Grid item xs={6}>
+          <VehicleForm />
+        </Grid>
 
-      {/* Mostrar el formulario de ingreso al parqueadero */}
-      <ParkingForm />
+        <Grid item xs={6}>
+          <ParkingForm />
+        </Grid>
+      </Grid>
 
-      {/* Mostrar la visualización del estado del parqueadero */}
-      <ParkingLot />
-    </div>
+      <Grid item xs={12}>
+        <ParkingLot />
+      </Grid>
+    </Grid>
   );
 }
 
